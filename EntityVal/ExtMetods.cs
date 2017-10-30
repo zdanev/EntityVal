@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EntityVal
 {
@@ -7,12 +8,16 @@ namespace EntityVal
     {
         public static bool IsValid(this object o)
         {
-            throw new NotImplementedException();
+            var errors = o.Validate();
+
+            return errors.Count() == 0;
         }
 
         public static IEnumerable<ValidationError> Validate(this object o)
         {
-            throw new NotImplementedException();
+            var validator = new Validator();
+            
+            return validator.Validate(o);
         }
     }
 }

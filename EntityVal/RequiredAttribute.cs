@@ -3,7 +3,7 @@ using System;
 namespace EntityVal
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class RequiredAttribute : Attribute
+    public class RequiredAttribute : ValidationAttribute
     {
         const string DefaultMessage = "{0} is required.";
 

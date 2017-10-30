@@ -15,6 +15,9 @@ namespace EntityVal.Tests
             public string MiddleInitial { get; set; }
 
             public string LastName { get; set; }
+
+            [Min(21, "Persons under 21 are not allowed.")]
+            public int Age { get; set;}
         }
 
         [Fact]
