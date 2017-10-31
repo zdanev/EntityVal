@@ -5,15 +5,15 @@ namespace EntityVal
 {
     public class Validator
     {
-        public IEnumerable<ValidationError> Validate(object o)
+        public IEnumerable<ValidationError> Validate(object entity)
         {
             var errors = new List<ValidationError>();
 
-            var type = o.GetType();
+            var type = entity.GetType();
 
             foreach (var pi in type.GetProperties())
             {
-                var value = pi.GetValue(o);
+                var value = pi.GetValue(entity);
                 var fieldName = pi.Name;
                 var displayName = fieldName.PascalCaseToTitleCase();
 
@@ -25,7 +25,7 @@ namespace EntityVal
 
                 foreach (var attr in pi.GetCustomAttributes(typeof(ValidationAttribute), true))
                 {
-                    var error = ((ValidationAttribute)attr).Execute(fieldName, displayName, value);
+                    var error = ((ValidationAttribute)attr).Execute(fieldName, displayName, value, entity);
                     
                     if (error != null)
                     {
