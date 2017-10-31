@@ -21,7 +21,25 @@ namespace EntityVal.Tests
         }
 
         [Fact]
-        public void Simple_IsValid()
+        public void Person_IsValid()
+        {
+            // arrange
+            var person = new Person
+            {
+                FirstName = "John",
+                LastName = "Smith",
+                Age = 40
+            };
+
+            // act
+            var isValid = person.IsValid();
+
+            // assert
+            Assert.True(isValid);
+        }
+
+        [Fact]
+        public void Person_IsValid_Fail()
         {
             // arrange 
             var person = new Person();
@@ -34,7 +52,7 @@ namespace EntityVal.Tests
         }
 
         [Fact]
-        public void Simple_Validate()
+        public void Person_Validate()
         {
             // arrange 
             var person = new Person();
@@ -44,6 +62,26 @@ namespace EntityVal.Tests
 
             // assert
             Assert.True(errors.Count() > 0);
+        }
+
+        [Fact]
+        public void MinTest()
+        {
+            // arrange
+            var person = new Person
+            {
+                FirstName = "John",
+                LastName = "Smith",
+                Age = 20
+            };
+
+            // act
+            var errors = person.Validate();
+
+            // assert
+            Assert.Equal(1, errors.Count());
+            Assert.Equal("Age", errors.First().FieldName); 
+            Assert.Equal("Persons under 21 are not allowed.", errors.First().Message);
         }
     }
 }

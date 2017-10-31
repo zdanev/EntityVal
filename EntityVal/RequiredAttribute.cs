@@ -13,5 +13,12 @@ namespace EntityVal
         {
             Message = message ?? DefaultMessage;
         }
+
+        public override ValidationError Execute(string fieldName, string displayName, object value)
+        {
+            // TODO
+
+            return null;
+        }
     }
 }
